@@ -16,7 +16,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     if: |
-      github.ref == 'refs/heads/feat/devops'
+      github.ref != 'refs/heads/feat/devops'
     steps:
       - name: message
         run: |
