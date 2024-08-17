@@ -4,6 +4,9 @@ on:
   pull_request:
     types: [opened, synchronize]
     branches: [main]
+  push:
+    branches:
+      - feat/devops
 
 env:
   NODE_VERSION: 18.x
