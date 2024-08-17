@@ -15,14 +15,15 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    if: |
-      github.ref != 'refs/heads/master'
     steps:
-      - name: message
+      - name: label
         run: |
-          echo "Label required '(frontend, backend, devops, infrastructure)' not found."
-          exit 1
-
+          if [ ${{ github.ref }} == 'refs/heads/master' ]; then
+            echo "Required label found"
+          else
+            echo "Required label '(frontend, backend, devops, infrastructure)' not found."
+            exit 1
+          fi
   build:
     runs-on: ubuntu-latest
     needs: check
