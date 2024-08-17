@@ -45,3 +45,17 @@ jobs:
 
       - name: Build Project
         run: pnpm lint
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Configure Worflow
+        uses: ./.github/actions/configure
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions@v2
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
