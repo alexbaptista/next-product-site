@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: label
         run: |
-          if [ ${{ github.ref }} == 'refs/heads/master' ]; then
+          if [ ${{ github.ref }} == 'refs/heads/feat/devops' ]; then
             echo "Required label found"
           else
             echo "Required label '(frontend, backend, devops, infrastructure)' not found."
