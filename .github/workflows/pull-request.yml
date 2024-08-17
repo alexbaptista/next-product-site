@@ -16,10 +16,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     if: |
-      github.event.pull_request.labels.*.name != 'devops' ||
-      github.event.pull_request.labels.*.name != 'infrastructure' ||
-      github.event.pull_request.labels.*.name != 'frontend' ||
-      github.event.pull_request.labels.*.name != 'backend'
+      github.ref == 'refs/heads/feat/devops'
     steps:
       - name: message
         run: |
