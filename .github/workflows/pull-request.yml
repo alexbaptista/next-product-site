@@ -12,7 +12,7 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    if: "!(contains(github.event.pull_request.labels.*.name, 'frontend') || contains(github.event.pull_request.labels.*.name, 'backend'))"
+    if: "!(contains(github.event.pull_request.labels.*.name, 'frontend') || contains(github.event.pull_request.labels.*.name, 'backend') || contains(github.event.pull_request.labels.*.name, 'devops') || contains(github.event.pull_request.labels.*.name, 'infrastructure'))"
     steps:
       - name: message
         run: |
@@ -65,7 +65,6 @@ jobs:
         uses: ./.github/actions/configure
 
       - name: Run Snyk to check for vulnerabilities
-        continue-on-error: true
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
