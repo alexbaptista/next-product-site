@@ -15,18 +15,15 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
+    if: != contains(fromJSON('["frontend", "backend", "devops", "infrastructure"]'), github.event.pull_request.labels.name)
     steps:
-      - name: label
+      - name: message
         run: |
-          if [ ${{ github.ref }} == 'refs/heads/feat/devops' ]; then
-            echo "Required label found"
-          else
-            echo "Required label '(frontend, backend, devops, infrastructure)' not found."
-            exit 1
-          fi
+          echo "Required label '(frontend, backend, devops, infrastructure)' not found."
+          exit 1
+
   build:
     runs-on: ubuntu-latest
-    needs: check
     steps:
       - name: Checkout Git
         uses: actions/checkout@v4
@@ -39,7 +36,6 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: check
     steps:
       - name: Checkout Git
         uses: actions/checkout@v4
@@ -52,7 +48,6 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
-    needs: check
     steps:
       - name: Checkout Git
         uses: actions/checkout@v4
@@ -65,10 +60,12 @@ jobs:
 
   security:
     runs-on: ubuntu-latest
-    needs: check
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
+      - name: Configure Worflow
+        uses: ./.github/actions/configure
 
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
