@@ -15,7 +15,11 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    if: !contains(github.event.issue.labels.*.name , 'frontend') || !contains(github.event.issue.labels.*.name, 'backend') || !contains(github.event.issue.labels.*.name, 'devops') || !contains(github.event.issue.labels.*.name, 'infrastructure')
+    if: |
+      github.event.pull_request.labels.*.name != 'devops' ||
+      github.event.pull_request.labels.*.name != 'infrastructure' ||
+      github.event.pull_request.labels.*.name != 'frontend' ||
+      github.event.pull_request.labels.*.name != 'backend'
     steps:
       - name: message
         run: |
