@@ -2,7 +2,7 @@ name: Pull Request
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, labeled]
     branches: [main]
   push:
     branches:
@@ -15,7 +15,7 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    if: ${{ !(contains(fromJSON('["frontend", "backend", "refs/feat/devops", "infrastructure"]'), github.event.ref)) }}
+    if: !contains(github.event.issue.labels.*.name , 'frontend') || !contains(github.event.issue.labels.*.name, 'backend') || !contains(github.event.issue.labels.*.name, 'devops') || !contains(github.event.issue.labels.*.name, 'infrastructure')
     steps:
       - name: message
         run: |
