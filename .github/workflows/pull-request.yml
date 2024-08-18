@@ -15,7 +15,7 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    if: "!(contains(github.event.pull_request.labels.*.name, 'frontend') || contains(github.event.pull_request.labels.*.name, 'backend')) || !contains(github.event.ref, 'feat/devops')"
+    if: "!(contains(github.event.pull_request.labels.*.name, 'frontend') || contains(github.event.pull_request.labels.*.name, 'backend')) || !contains(github.ref, 'feat/devops')"
     steps:
       - name: message
         run: |
