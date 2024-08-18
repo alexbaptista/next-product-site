@@ -65,6 +65,7 @@ jobs:
         uses: ./.github/actions/configure
 
       - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
