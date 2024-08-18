@@ -15,7 +15,7 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    if: ${{ !(contains(fromJSON('["frontend", "backend", "devops", "infrastructure"]'), github.event.ref)) }}
+    if: ${{ !(contains(fromJSON('["frontend", "backend", "refs/feat/devops", "infrastructure"]'), github.event.ref)) }}
     steps:
       - name: message
         run: |
